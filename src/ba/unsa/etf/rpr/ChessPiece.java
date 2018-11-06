@@ -14,7 +14,13 @@ public abstract class ChessPiece {
         this.color = color;
     }
 
-    public abstract String getPosition();
-    public abstract Color getColor();
-    public abstract void move(String position);
+    public String getPosition() {
+        return position;
+    }
+    public Color getColor() {
+        return color;
+    }
+    public abstract void move(String position) {
+
+    }
 }
