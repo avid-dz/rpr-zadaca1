@@ -6,7 +6,13 @@ public abstract class ChessPiece {
         BLACK, WHITE
     }
 
-    public abstract ChessPiece(String position, Color color);
+    protected String position;
+    protected Color color;
+
+    public ChessPiece(String position, Color color) {
+        this.position = position;
+        this.color = color;
+    }
 
     public abstract String getPosition();
     public abstract Color getColor();
