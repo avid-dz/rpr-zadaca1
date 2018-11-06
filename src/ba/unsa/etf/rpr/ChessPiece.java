@@ -17,7 +17,7 @@ public abstract class ChessPiece {
     private boolean ispravnaPozicija(String position) {
         if (position.length() != 2)
             return false;
-        if (!ispravni.contains(position.charAt(0)))
+        if (!ispravni.contains(Character.toString(position.charAt(0))))
             return false;
         if (!Character.isDigit(position.charAt(1)))
             return false;
