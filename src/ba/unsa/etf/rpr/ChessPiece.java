@@ -23,7 +23,7 @@ public abstract class ChessPiece {
             return false;
         if (position.charAt(1) < 1 || position.charAt(1) > 8)
             return false;
-        return false;
+        return true;
     }
 
     public ChessPiece(String position, Color color) {
