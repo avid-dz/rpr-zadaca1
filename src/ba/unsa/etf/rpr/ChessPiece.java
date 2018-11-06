@@ -20,7 +20,7 @@ public abstract class ChessPiece {
     public Color getColor() {
         return color;
     }
-    public abstract void move(String position) {
-
+    public void move(String position) {
+        this.position = position;
     }
 }
