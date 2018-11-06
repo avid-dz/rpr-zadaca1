@@ -13,6 +13,6 @@ public class Board {
 
     }
     public boolean isCheck(ChessPiece.Color color) {
-
+        return false;
     }
 }
