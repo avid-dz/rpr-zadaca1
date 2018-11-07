@@ -2,6 +2,9 @@ package ba.unsa.etf.rpr;
 
 public class Board {
 
+    private
+    private
+
     public Board() {
 
     }

@@ -42,7 +42,6 @@ public abstract class ChessPiece {
     public void move(String position) {
         if (!ispravnaPozicija(position))
             throw new IllegalArgumentException("Pozicija je neispravnog formata ili je van table!");
-
         this.position = position;
     }
 }
