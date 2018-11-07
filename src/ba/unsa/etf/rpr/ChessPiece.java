@@ -1,15 +1,10 @@
 package ba.unsa.etf.rpr;
 
-import java.util.ArrayList;
-import java.util.ArrayList.*;
-
 public abstract class ChessPiece {
 
     public static enum Color {
         BLACK, WHITE
     }
-
-    private String ispravni = "ABCDEFGHabcdefgh";
 
     protected String position;
     protected Color color;
@@ -17,7 +12,7 @@ public abstract class ChessPiece {
     private boolean ispravnaPozicija(String position) {
         if (position.length() != 2)
             return false;
-        if (!ispravni.contains(Character.toString(position.charAt(0))))
+        if (!"ABCDEFGHabcdefgh".contains(Character.toString(position.charAt(0))))
             return false;
         if (!Character.isDigit(position.charAt(1)))
             return false;
@@ -26,9 +21,11 @@ public abstract class ChessPiece {
         return true;
     }
 
+    protected abstract boolean ispravnoZaTuFiguru(String position);
+
     public ChessPiece(String position, Color color) {
         if (!ispravnaPozicija(position))
-            throw new IllegalArgumentException("Pozicija je neispravnog formata ili je van table!");
+            throw new IllegalArgumentException("Position invalid or out of range!");
         this.position = position;
         this.color = color;
     }
@@ -41,7 +38,9 @@ public abstract class ChessPiece {
     }
     public void move(String position) {
         if (!ispravnaPozicija(position))
-            throw new IllegalArgumentException("Pozicija je neispravnog formata ili je van table!");
+            throw new IllegalArgumentException("Position invalid or out of range!");
+        if (!ispravnoZaTuFiguru(position))
+            throw new IllegalChessMoveException("Illegal move for that kind of chess piece!");
         this.position = position;
     }
 }
