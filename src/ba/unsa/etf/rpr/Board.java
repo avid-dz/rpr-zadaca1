@@ -2,12 +2,12 @@ package ba.unsa.etf.rpr;
 
 public class Board {
 
-    private
+    /*private
     private
 
     public Board() {
 
-    }
+    }*/
 
     public void move(Class type, ChessPiece.Color color, String position) {
 
