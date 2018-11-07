@@ -1,9 +1,12 @@
 package ba.unsa.etf.rpr;
 
+import java.lang.Math;
+
 public class King extends ChessPiece {
 
     protected boolean ispravnoZaTuFiguru(String position) {
-        if (ChessPiece.slovnaKoordinata(position) - ChessPiece.slovnaKoordinata(this.position) == 0) return false;
+        if (Math.abs(ChessPiece.slovnaKoordinata(position) - ChessPiece.slovnaKoordinata(this.position)) > 1) return false;
+
         return true;
     }
 

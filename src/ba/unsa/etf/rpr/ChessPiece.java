@@ -10,7 +10,7 @@ public abstract class ChessPiece {
     protected Color color;
 
     public static int slovnaKoordinata(String position) {
-        return (int) position.charAt(0);
+        return (int) position.toUpperCase().charAt(0);
     }
     public static int brojevnaKoordinata(String position) {
         return (int) position.charAt(1);
