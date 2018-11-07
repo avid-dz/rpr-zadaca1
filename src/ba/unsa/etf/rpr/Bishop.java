@@ -2,11 +2,11 @@ package ba.unsa.etf.rpr;
 
 public class Bishop extends ChessPiece {
 
-    public Bishop(String position, ChessPiece.Color color) {
-        super(position, color);
+    protected boolean ispravnoZaTuFiguru(String position) {
+        return true;
     }
 
-    public void move(String position) {
-
+    public Bishop(String position, ChessPiece.Color color) {
+        super(position, color);
     }
 }

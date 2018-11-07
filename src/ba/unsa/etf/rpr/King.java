@@ -2,11 +2,12 @@ package ba.unsa.etf.rpr;
 
 public class King extends ChessPiece {
 
-    public King(String position, ChessPiece.Color color) {
-        super(position, color);
+    protected boolean ispravnoZaTuFiguru(String position) {
+        if (ChessPiece.slovnaKoordinata(position) - ChessPiece.slovnaKoordinata(this.position) == 0) return false;
+        return true;
     }
 
-    public void move(String position) {
-
+    public King(String position, ChessPiece.Color color) {
+        super(position, color);
     }
 }

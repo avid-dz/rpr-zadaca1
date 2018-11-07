@@ -9,6 +9,13 @@ public abstract class ChessPiece {
     protected String position;
     protected Color color;
 
+    public static int slovnaKoordinata(String position) {
+        return (int) position.charAt(0);
+    }
+    public static int brojevnaKoordinata(String position) {
+        return (int) position.charAt(1);
+    }
+
     private boolean ispravnaPozicija(String position) {
         if (position.length() != 2)
             return false;
