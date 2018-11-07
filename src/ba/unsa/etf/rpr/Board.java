@@ -10,7 +10,7 @@ public class Board {
     public Board() {
         listaCrnih = new ArrayList<>();
         listaBijelih = new ArrayList<>();
-        listaCrnih.add(new Rook("A1", ChessPiece.Color.WHITE));
+        //listaCrnih.add(new Rook("A1", ChessPiece.Color.WHITE));
     }
 
     public void move(Class type, ChessPiece.Color color, String position) {
