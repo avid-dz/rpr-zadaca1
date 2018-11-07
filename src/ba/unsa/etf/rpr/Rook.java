@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr;
 
-public class Rook {
+public class Rook extends ChessPiece {
 
     public Rook(String position, ChessPiece.Color color) {
         super(position, color);
