@@ -11,6 +11,9 @@ public class Pawn extends ChessPiece {
                 && (Math.abs(ChessPiece.brojevnaKoordinata(position)
                 - ChessPiece.brojevnaKoordinata(this.position)) > 1))
             return false;
+        if (Math.abs(ChessPiece.brojevnaKoordinata(position) - ChessPiece.brojevnaKoordinata(this.position)) == 2
+                && Math.abs(ChessPiece.slovnaKoordinata(position) - ChessPiece.slovnaKoordinata(this.position)) > 0)
+            return false;
         return true;
     }
 
