@@ -13,13 +13,13 @@ public abstract class ChessPiece {
         return (int) position.toUpperCase().charAt(0);
     }
     public static int brojevnaKoordinata(String position) {
-        return (int) position.charAt(1);
+        return position.charAt(1) - '0';
     }
 
     private boolean ispravnaPozicija(String position) {
         if (position.length() != 2)
             return false;
-        if (!"ABCDEFGHabcdefgh".contains(Character.toString(position.charAt(0))))
+        if (!("ABCDEFGHabcdefgh".contains(Character.toString(position.charAt(0)))))
             return false;
         if (!Character.isDigit(position.charAt(1)))
             return false;
