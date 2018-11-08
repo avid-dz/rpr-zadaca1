@@ -23,7 +23,7 @@ public abstract class ChessPiece {
             return false;
         if (!Character.isDigit(position.charAt(1)))
             return false;
-        if (position.charAt(1) < 1 || position.charAt(1) > 8)
+        if (brojevnaKoordinata(position) < 1 || brojevnaKoordinata(position) > 8)
             return false;
         return true;
     }
