@@ -1,7 +1,5 @@
 package ba.unsa.etf.rpr;
 
-import java.lang.Math;
-
 public class King extends ChessPiece {
 
     protected boolean ispravnoZaTuFiguru(String position) {
