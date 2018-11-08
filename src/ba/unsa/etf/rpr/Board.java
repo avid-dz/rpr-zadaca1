@@ -59,11 +59,11 @@ public class Board {
         }
         if (!isFound) throw new IllegalChessMoveException("No legal chess pieces found for that move!");
         for (ChessPiece chessPiece : piecesList) {
-            if (chessPiece != movablePiece
-                    && chessPiece.getPosition().equals(position)
-                    && chessPiece.getColor() == movablePiece.getColor()) {
-                movablePiece.position = olderPosition;
-                throw new IllegalChessMoveException("Field already taken by the same color!");
+            if (chessPiece != movablePiece) {
+                if (chessPiece.getPosition().equals(position) && chessPiece.getColor() == movablePiece.getColor()) {
+                    movablePiece.position = olderPosition;
+                    throw new IllegalChessMoveException("Field already taken by the same color!");
+                }
             }
         }
         if (movablePiece instanceof Pawn
