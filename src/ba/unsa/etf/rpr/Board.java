@@ -336,7 +336,18 @@ public class Board {
         }
     }
     public void move(String oldPosition, String newPosition) {
-
+        if (!thereIsAPieceHere(oldPosition)) {
+            throw new IllegalArgumentException("There is no chess piece there!");
+        }
+        else {
+            int iter = 0;
+            for (ChessPiece chessPiece : piecesList) {
+                if (chessPiece.getPosition().equals(oldPosition))
+                    break;
+                iter++;
+            }
+            move(piecesList.get(iter).getClass(), piecesList.get(iter).getColor(), newPosition);
+        }
     }
     public boolean isCheck(ChessPiece.Color color) {
         return false;
