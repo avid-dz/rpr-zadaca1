@@ -13,10 +13,13 @@ public abstract class ChessPiece {
         return (int) position.toUpperCase().charAt(0);
     }
     public static int numberCoordinate(String position) {
-        return position.charAt(1) - '0';
+        return position.toUpperCase().charAt(1) - '0';
     }
     public static String letterStringCoordinate(String position) {
         return Character.toString(position.toUpperCase().charAt(0));
+    }
+    public static String numberStringCoordinate(String position) {
+        return Character.toString(position.toUpperCase().charAt(1));
     }
 
     private boolean validPosition(String position) {
