@@ -106,15 +106,109 @@ public class Board {
                 }
             }
         }
-        /*if (movablePiece instanceof Rook) {
-
+        if (movablePiece instanceof Rook) {
+            if (ChessPiece.numberCoordinate(olderPosition) - ChessPiece.numberCoordinate(position) > 1) {
+                for (int iterNumber = ChessPiece.numberCoordinate(position) + 1;
+                     iterNumber < ChessPiece.numberCoordinate(olderPosition); iterNumber++) {
+                    String middleStringPosition = "";
+                    middleStringPosition += ChessPiece.letterStringCoordinate(position);
+                    middleStringPosition += Integer.toString(iterNumber);
+                    if (thereIsAPieceHere(middleStringPosition)) {
+                        movablePiece.position = olderPosition;
+                        throw new IllegalChessMoveException("A rook cannot jump over other chess pieces!");
+                    }
+                }
+            }
+            if (ChessPiece.numberCoordinate(position) - ChessPiece.numberCoordinate(olderPosition) > 1) {
+                for (int iterNumber = ChessPiece.numberCoordinate(olderPosition) + 1;
+                     iterNumber < ChessPiece.numberCoordinate(position); iterNumber++) {
+                    String middleStringPosition = "";
+                    middleStringPosition += ChessPiece.letterStringCoordinate(position);
+                    middleStringPosition += Integer.toString(iterNumber);
+                    if (thereIsAPieceHere(middleStringPosition)) {
+                        movablePiece.position = olderPosition;
+                        throw new IllegalChessMoveException("A rook cannot jump over other chess pieces!");
+                    }
+                }
+            }
+            if (ChessPiece.letterCoordinate(position) - ChessPiece.letterCoordinate(olderPosition) > 1) {
+                for (int iterLetter = ChessPiece.letterCoordinate(olderPosition) + 1;
+                     iterLetter < ChessPiece.letterCoordinate(position); iterLetter++) {
+                    String middleStringPosition = "";
+                    middleStringPosition += Character.toString((char) iterLetter);
+                    middleStringPosition += ChessPiece.numberStringCoordinate(position);
+                    if (thereIsAPieceHere(middleStringPosition)) {
+                        movablePiece.position = olderPosition;
+                        throw new IllegalChessMoveException("A rook cannot jump over other chess pieces!");
+                    }
+                }
+            }
+            if (ChessPiece.letterCoordinate(olderPosition) - ChessPiece.letterCoordinate(position) > 1) {
+                for (int iterLetter = ChessPiece.letterCoordinate(position) + 1;
+                     iterLetter < ChessPiece.letterCoordinate(olderPosition); iterLetter++) {
+                    String middleStringPosition = "";
+                    middleStringPosition += Character.toString((char) iterLetter);
+                    middleStringPosition += ChessPiece.numberStringCoordinate(position);
+                    if (thereIsAPieceHere(middleStringPosition)) {
+                        movablePiece.position = olderPosition;
+                        throw new IllegalChessMoveException("A rook cannot jump over other chess pieces!");
+                    }
+                }
+            }
         }
-        if (movablePiece instanceof Bishop) {
-
-        }
-        if (movablePiece instanceof Queen) {
+        /*if (movablePiece instanceof Bishop) {
 
         }*/
+        if (movablePiece instanceof Queen) {
+            if (ChessPiece.numberCoordinate(olderPosition) - ChessPiece.numberCoordinate(position) > 1) {
+                for (int iterNumber = ChessPiece.numberCoordinate(position) + 1;
+                     iterNumber < ChessPiece.numberCoordinate(olderPosition); iterNumber++) {
+                    String middleStringPosition = "";
+                    middleStringPosition += ChessPiece.letterStringCoordinate(position);
+                    middleStringPosition += Integer.toString(iterNumber);
+                    if (thereIsAPieceHere(middleStringPosition)) {
+                        movablePiece.position = olderPosition;
+                        throw new IllegalChessMoveException("A rook cannot jump over other chess pieces!");
+                    }
+                }
+            }
+            if (ChessPiece.numberCoordinate(position) - ChessPiece.numberCoordinate(olderPosition) > 1) {
+                for (int iterNumber = ChessPiece.numberCoordinate(olderPosition) + 1;
+                     iterNumber < ChessPiece.numberCoordinate(position); iterNumber++) {
+                    String middleStringPosition = "";
+                    middleStringPosition += ChessPiece.letterStringCoordinate(position);
+                    middleStringPosition += Integer.toString(iterNumber);
+                    if (thereIsAPieceHere(middleStringPosition)) {
+                        movablePiece.position = olderPosition;
+                        throw new IllegalChessMoveException("A rook cannot jump over other chess pieces!");
+                    }
+                }
+            }
+            if (ChessPiece.letterCoordinate(position) - ChessPiece.letterCoordinate(olderPosition) > 1) {
+                for (int iterLetter = ChessPiece.letterCoordinate(olderPosition) + 1;
+                     iterLetter < ChessPiece.letterCoordinate(position); iterLetter++) {
+                    String middleStringPosition = "";
+                    middleStringPosition += Character.toString((char) iterLetter);
+                    middleStringPosition += ChessPiece.numberStringCoordinate(position);
+                    if (thereIsAPieceHere(middleStringPosition)) {
+                        movablePiece.position = olderPosition;
+                        throw new IllegalChessMoveException("A rook cannot jump over other chess pieces!");
+                    }
+                }
+            }
+            if (ChessPiece.letterCoordinate(olderPosition) - ChessPiece.letterCoordinate(position) > 1) {
+                for (int iterLetter = ChessPiece.letterCoordinate(position) + 1;
+                     iterLetter < ChessPiece.letterCoordinate(olderPosition); iterLetter++) {
+                    String middleStringPosition = "";
+                    middleStringPosition += Character.toString((char) iterLetter);
+                    middleStringPosition += ChessPiece.numberStringCoordinate(position);
+                    if (thereIsAPieceHere(middleStringPosition)) {
+                        movablePiece.position = olderPosition;
+                        throw new IllegalChessMoveException("A rook cannot jump over other chess pieces!");
+                    }
+                }
+            }
+        }
     }
     public void move(String oldPosition, String newPosition) {
 
