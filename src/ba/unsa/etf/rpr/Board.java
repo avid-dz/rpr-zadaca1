@@ -6,6 +6,13 @@ public class Board {
 
     private ArrayList<ChessPiece> piecesList;
 
+    private boolean thereIsAPieceHere(String position) {
+        for (ChessPiece chessPiece : piecesList) {
+            if (chessPiece.getPosition().equals(position)) return true;
+        }
+        return false;
+    }
+
     public Board() {
         piecesList = new ArrayList<>();
         piecesList.add(new Rook("A1", ChessPiece.Color.WHITE));
@@ -86,6 +93,28 @@ public class Board {
             indexForRemoval++;
         }
         if (removePiece) piecesList.remove(indexForRemoval);
+        if (movablePiece instanceof Pawn) {
+            int middle = 0;
+            String middleStringPosition = "";
+            if (Math.abs(ChessPiece.numberCoordinate(olderPosition) - ChessPiece.numberCoordinate(position)) == 2) {
+                middle = (ChessPiece.numberCoordinate(olderPosition) + ChessPiece.numberCoordinate(position))/2;
+                middleStringPosition += ChessPiece.letterStringCoordinate(position);
+                middleStringPosition += Integer.toString(middle);
+                if (thereIsAPieceHere(middleStringPosition)) {
+                    movablePiece.position = olderPosition;
+                    throw new IllegalChessMoveException("A pawn cannot jump over other chess pieces!");
+                }
+            }
+        }
+        /*if (movablePiece instanceof Rook) {
+
+        }
+        if (movablePiece instanceof Bishop) {
+
+        }
+        if (movablePiece instanceof Queen) {
+
+        }*/
     }
     public void move(String oldPosition, String newPosition) {
 
