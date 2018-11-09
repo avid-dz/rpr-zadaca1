@@ -84,16 +84,6 @@ public class Board {
                 }
             }
         }
-        int indexForRemoval = 0;
-        boolean removePiece = false;
-        for (ChessPiece chessPiece : piecesList) {
-            if (chessPiece != movablePiece && chessPiece.getPosition().equals(movablePiece.getPosition())) {
-                removePiece = true;
-                break;
-            }
-            indexForRemoval++;
-        }
-        if (removePiece) piecesList.remove(indexForRemoval);
         if (movablePiece instanceof Pawn) {
             int middle = 0;
             String middleStringPosition = "";
@@ -333,6 +323,16 @@ public class Board {
                 }
             }
         }
+        int indexForRemoval = 0;
+        boolean removePiece = false;
+        for (ChessPiece chessPiece : piecesList) {
+            if (chessPiece != movablePiece && chessPiece.getPosition().equals(movablePiece.getPosition())) {
+                removePiece = true;
+                break;
+            }
+            indexForRemoval++;
+        }
+        if (removePiece) piecesList.remove(indexForRemoval);
     }
     public void move(String oldPosition, String newPosition) {
         oldPosition = oldPosition.toUpperCase();
@@ -351,6 +351,62 @@ public class Board {
         }
     }
     public boolean isCheck(ChessPiece.Color color) {
+        if (color == ChessPiece.Color.WHITE) {
+            String kingPos = "";
+            int kingIndex = 0;
+            for (ChessPiece chessPiece : piecesList) {
+                if (chessPiece instanceof King) {
+                    if (chessPiece.getColor() == ChessPiece.Color.WHITE) {
+                        kingPos = chessPiece.getPosition();
+                        break;
+                    }
+                }
+                kingIndex++;
+            }
+            boolean kingEatable = false;
+            for (int i = 0; i < piecesList.size(); i++) {
+                if (piecesList.get(i).getColor() == ChessPiece.Color.BLACK) {
+                    try {
+                        String oldPiecePosition = piecesList.get(i).getPosition();
+                        move(piecesList.get(i).getClass(), ChessPiece.Color.BLACK, kingPos);
+                        piecesList.get(i).position = oldPiecePosition;
+                        piecesList.add(kingIndex, new King(kingPos, ChessPiece.Color.WHITE));
+                        kingEatable = true;
+                        break;
+                    } catch (Exception e) {
+                    }
+                }
+            }
+            if (kingEatable) return true;
+        }
+        if (color == ChessPiece.Color.BLACK) {
+            String kingPos = "";
+            int kingIndex = 0;
+            for (ChessPiece chessPiece : piecesList) {
+                if (chessPiece instanceof King) {
+                    if (chessPiece.getColor() == ChessPiece.Color.BLACK) {
+                        kingPos = chessPiece.getPosition();
+                        break;
+                    }
+                }
+                kingIndex++;
+            }
+            boolean kingEatable = false;
+            for (int i = 0; i < piecesList.size(); i++) {
+                if (piecesList.get(i).getColor() == ChessPiece.Color.WHITE) {
+                    try {
+                        String oldPiecePosition = piecesList.get(i).getPosition();
+                        move(piecesList.get(i).getClass(), ChessPiece.Color.WHITE, kingPos);
+                        piecesList.get(i).position = oldPiecePosition;
+                        piecesList.add(kingIndex, new King(kingPos, ChessPiece.Color.BLACK));
+                        kingEatable = true;
+                        break;
+                    } catch (Exception e) {
+                    }
+                }
+            }
+            if (kingEatable) return true;
+        }
         return false;
     }
 }
