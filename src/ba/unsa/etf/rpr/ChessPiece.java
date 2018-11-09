@@ -44,7 +44,7 @@ public abstract class ChessPiece {
     }
 
     public String getPosition() {
-        return position;
+        return position.toUpperCase();
     }
     public Color getColor() {
         return color;

@@ -1,7 +1,5 @@
 package ba.unsa.etf.rpr;
 
-import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
-
 import java.util.ArrayList;
 
 public class Board {
@@ -10,7 +8,7 @@ public class Board {
 
     private boolean thereIsAPieceHere(String position) {
         for (ChessPiece chessPiece : piecesList) {
-            if (chessPiece.getPosition().equals(position)) return true;
+            if (chessPiece.getPosition().equals(position.toUpperCase())) return true;
         }
         return false;
     }
@@ -52,6 +50,7 @@ public class Board {
     }
 
     public void move(Class type, ChessPiece.Color color, String position) {
+        position = position.toUpperCase();
         String olderPosition = "";
         boolean isFound = false;
         ChessPiece movablePiece = null;
@@ -336,6 +335,8 @@ public class Board {
         }
     }
     public void move(String oldPosition, String newPosition) {
+        oldPosition = oldPosition.toUpperCase();
+        newPosition = newPosition.toUpperCase();
         if (!thereIsAPieceHere(oldPosition)) {
             throw new IllegalArgumentException("There is no chess piece there!");
         }
