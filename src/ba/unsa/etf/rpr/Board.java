@@ -76,6 +76,16 @@ public class Board {
                 }
             }
         }
+        int indexForRemoval = 0;
+        boolean removePiece = false;
+        for (ChessPiece chessPiece : piecesList) {
+            if (chessPiece != movablePiece && chessPiece.getPosition().equals(movablePiece.getPosition())) {
+                removePiece = true;
+                break;
+            }
+            indexForRemoval++;
+        }
+        if (removePiece) piecesList.remove(indexForRemoval);
     }
     public void move(String oldPosition, String newPosition) {
 
