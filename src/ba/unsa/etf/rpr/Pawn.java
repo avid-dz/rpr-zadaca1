@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr;
 public class Pawn extends ChessPiece {
 
     protected boolean legalForThatKindOfPiece(String position) {
+        position = position.toUpperCase();
         if (ChessPiece.numberCoordinate(position) == ChessPiece.numberCoordinate(this.position))
             return false;
         if (Math.abs(ChessPiece.letterCoordinate(position) - ChessPiece.letterCoordinate(this.position)) > 1)

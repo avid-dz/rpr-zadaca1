@@ -39,7 +39,7 @@ public abstract class ChessPiece {
     public ChessPiece(String position, Color color) {
         if (!validPosition(position))
             throw new IllegalArgumentException("Position invalid or out of range!");
-        this.position = position;
+        this.position = position.toUpperCase();
         this.color = color;
     }
 

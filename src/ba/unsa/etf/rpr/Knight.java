@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr;
 public class Knight extends ChessPiece {
 
     protected boolean legalForThatKindOfPiece(String position) {
+        position = position.toUpperCase();
         if (!(Math.abs(ChessPiece.letterCoordinate(position)
                 - ChessPiece.letterCoordinate(this.position)) == 2
                 && Math.abs(ChessPiece.numberCoordinate(position)
