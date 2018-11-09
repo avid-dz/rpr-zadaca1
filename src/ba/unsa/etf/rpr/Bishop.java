@@ -2,9 +2,9 @@ package ba.unsa.etf.rpr;
 
 public class Bishop extends ChessPiece {
 
-    protected boolean ispravnoZaTuFiguru(String position) {
-        if (Math.abs(ChessPiece.slovnaKoordinata(position) - ChessPiece.slovnaKoordinata(this.position)) !=
-                Math.abs(ChessPiece.brojevnaKoordinata(position) - ChessPiece.brojevnaKoordinata(this.position)))
+    protected boolean legalForThatKindOfPiece(String position) {
+        if (Math.abs(ChessPiece.letterCoordinate(position) - ChessPiece.letterCoordinate(this.position)) !=
+                Math.abs(ChessPiece.numberCoordinate(position) - ChessPiece.numberCoordinate(this.position)))
             return false;
         return true;
     }

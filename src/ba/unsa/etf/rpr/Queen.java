@@ -2,7 +2,8 @@ package ba.unsa.etf.rpr;
 
 public class Queen extends ChessPiece {
 
-    protected boolean ispravnoZaTuFiguru(String position) {
+    protected boolean legalForThatKindOfPiece(String position) {
+
         return true;
     }
 

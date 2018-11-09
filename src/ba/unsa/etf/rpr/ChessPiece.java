@@ -9,29 +9,29 @@ public abstract class ChessPiece {
     protected String position;
     protected Color color;
 
-    public static int slovnaKoordinata(String position) {
+    public static int letterCoordinate(String position) {
         return (int) position.toUpperCase().charAt(0);
     }
-    public static int brojevnaKoordinata(String position) {
+    public static int numberCoordinate(String position) {
         return position.charAt(1) - '0';
     }
 
-    private boolean ispravnaPozicija(String position) {
+    private boolean validPosition(String position) {
         if (position.length() != 2)
             return false;
         if (!("ABCDEFGHabcdefgh".contains(Character.toString(position.charAt(0)))))
             return false;
         if (!Character.isDigit(position.charAt(1)))
             return false;
-        if (brojevnaKoordinata(position) < 1 || brojevnaKoordinata(position) > 8)
+        if (numberCoordinate(position) < 1 || numberCoordinate(position) > 8)
             return false;
         return true;
     }
 
-    protected abstract boolean ispravnoZaTuFiguru(String position);
+    protected abstract boolean legalForThatKindOfPiece(String position);
 
     public ChessPiece(String position, Color color) {
-        if (!ispravnaPozicija(position))
+        if (!validPosition(position))
             throw new IllegalArgumentException("Position invalid or out of range!");
         this.position = position;
         this.color = color;
@@ -44,9 +44,9 @@ public abstract class ChessPiece {
         return color;
     }
     public void move(String position) {
-        if (!ispravnaPozicija(position))
+        if (!validPosition(position))
             throw new IllegalArgumentException("Position invalid or out of range!");
-        if (!ispravnoZaTuFiguru(position))
+        if (!legalForThatKindOfPiece(position))
             throw new IllegalChessMoveException("Illegal move for that kind of chess piece!");
         this.position = position;
     }

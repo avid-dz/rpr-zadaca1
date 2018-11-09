@@ -2,10 +2,10 @@ package ba.unsa.etf.rpr;
 
 public class King extends ChessPiece {
 
-    protected boolean ispravnoZaTuFiguru(String position) {
-        if (Math.abs(ChessPiece.slovnaKoordinata(position) - ChessPiece.slovnaKoordinata(this.position)) > 1)
+    protected boolean legalForThatKindOfPiece(String position) {
+        if (Math.abs(ChessPiece.letterCoordinate(position) - ChessPiece.letterCoordinate(this.position)) > 1)
             return false;
-        if (Math.abs(ChessPiece.brojevnaKoordinata(position) - ChessPiece.brojevnaKoordinata(this.position)) > 1)
+        if (Math.abs(ChessPiece.numberCoordinate(position) - ChessPiece.numberCoordinate(this.position)) > 1)
             return false;
         return true;
     }

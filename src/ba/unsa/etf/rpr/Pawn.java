@@ -2,17 +2,17 @@ package ba.unsa.etf.rpr;
 
 public class Pawn extends ChessPiece {
 
-    protected boolean ispravnoZaTuFiguru(String position) {
-        if (Math.abs(ChessPiece.slovnaKoordinata(position) - ChessPiece.slovnaKoordinata(this.position)) > 1)
+    protected boolean legalForThatKindOfPiece(String position) {
+        if (Math.abs(ChessPiece.letterCoordinate(position) - ChessPiece.letterCoordinate(this.position)) > 1)
             return false;
-        if (Math.abs(ChessPiece.brojevnaKoordinata(position) - ChessPiece.brojevnaKoordinata(this.position)) > 2)
+        if (Math.abs(ChessPiece.numberCoordinate(position) - ChessPiece.numberCoordinate(this.position)) > 2)
             return false;
-        if ((ChessPiece.brojevnaKoordinata(this.position) == 4 || ChessPiece.brojevnaKoordinata(this.position) == 5)
-                && (Math.abs(ChessPiece.brojevnaKoordinata(position)
-                - ChessPiece.brojevnaKoordinata(this.position)) > 1))
+        if ((ChessPiece.numberCoordinate(this.position) == 4 || ChessPiece.numberCoordinate(this.position) == 5)
+                && (Math.abs(ChessPiece.numberCoordinate(position)
+                - ChessPiece.numberCoordinate(this.position)) > 1))
             return false;
-        if (Math.abs(ChessPiece.brojevnaKoordinata(position) - ChessPiece.brojevnaKoordinata(this.position)) == 2
-                && Math.abs(ChessPiece.slovnaKoordinata(position) - ChessPiece.slovnaKoordinata(this.position)) > 0)
+        if (Math.abs(ChessPiece.numberCoordinate(position) - ChessPiece.numberCoordinate(this.position)) == 2
+                && Math.abs(ChessPiece.letterCoordinate(position) - ChessPiece.letterCoordinate(this.position)) > 0)
             return false;
         return true;
     }

@@ -67,8 +67,8 @@ public class Board {
             }
         }
         if (movablePiece instanceof Pawn
-                && ChessPiece.slovnaKoordinata(olderPosition)
-                == ChessPiece.slovnaKoordinata(movablePiece.getPosition())) {
+                && ChessPiece.letterCoordinate(olderPosition)
+                == ChessPiece.letterCoordinate(movablePiece.getPosition())) {
             for (ChessPiece chessPiece : piecesList) {
                 if (chessPiece != movablePiece && chessPiece.getPosition().equals(movablePiece.getPosition())) {
                     movablePiece.position = olderPosition;
