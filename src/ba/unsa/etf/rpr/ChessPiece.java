@@ -15,6 +15,9 @@ public abstract class ChessPiece {
     public static int numberCoordinate(String position) {
         return position.charAt(1) - '0';
     }
+    public static String letterStringCoordinate(String position) {
+        return Character.toString(position.toUpperCase().charAt(0));
+    }
 
     private boolean validPosition(String position) {
         if (position.length() != 2)
@@ -48,6 +51,6 @@ public abstract class ChessPiece {
             throw new IllegalArgumentException("Position invalid or out of range!");
         if (!legalForThatKindOfPiece(position))
             throw new IllegalChessMoveException("Illegal move for that kind of chess piece!");
-        this.position = position;
+        this.position = position.toUpperCase();
     }
 }
