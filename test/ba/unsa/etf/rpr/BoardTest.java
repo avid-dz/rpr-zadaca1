@@ -547,6 +547,16 @@ class BoardTest {
     }
 
     @Test
+        // A bishop cannot jump pieces
+    void bishopJumping8() {
+        Board b = new Board();
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move(Bishop.class, ChessPiece.Color.WHITE, "C4")
+        );
+    }
+
+    @Test
         // A rook cannot jump pieces
     void move2Exception() {
         Board b = new Board();
@@ -773,6 +783,31 @@ class BoardTest {
         assertThrows(
                 IllegalChessMoveException.class,
                 () -> b.move("D1", "D4")
+        );
+    }
+
+    @Test
+        //  Pawn cannot jump pieces
+    void pawnJumping1() {
+        Board b = new Board();
+        b.move("E2", "E4");
+        b.move("E4", "E5");
+        b.move("E5", "E6");
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move(Pawn.class, ChessPiece.Color.BLACK, "E5")
+        );
+    }
+
+    @Test
+        //  Pawn can only move vertically if the destination field is empty
+    void pawnVertically1() {
+        Board b = new Board();
+        b.move("E2", "E4");
+        b.move("E7", "E5");
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move(Pawn.class, ChessPiece.Color.WHITE, "E5")
         );
     }
 }
