@@ -340,15 +340,282 @@ public class Board {
         if (!thereIsAPieceHere(oldPosition)) {
             throw new IllegalArgumentException("Illegal move");
         }
-        else {
-            int iter = 0;
-            for (ChessPiece chessPiece : piecesList) {
-                if (chessPiece.getPosition().equals(oldPosition))
-                    break;
-                iter++;
-            }
-            move(piecesList.get(iter).getClass(), piecesList.get(iter).getColor(), newPosition);
+        String olderPosition = oldPosition;
+        int iter = 0;
+        for (ChessPiece chessPiece : piecesList) {
+            if (chessPiece.getPosition().equals(oldPosition))
+                break;
+            iter++;
         }
+        piecesList.get(iter).move(newPosition);
+        ChessPiece movablePiece = piecesList.get(iter);
+        for (ChessPiece chessPiece : piecesList) {
+            if (chessPiece != movablePiece) {
+                if (chessPiece.getPosition().equals(newPosition) && chessPiece.getColor() == movablePiece.getColor()) {
+                    movablePiece.position = olderPosition;
+                    throw new IllegalChessMoveException("Illegal move");
+                }
+            }
+        }
+        if (movablePiece instanceof Pawn
+                && ChessPiece.letterCoordinate(olderPosition)
+                == ChessPiece.letterCoordinate(movablePiece.getPosition())) {
+            for (ChessPiece chessPiece : piecesList) {
+                if (chessPiece != movablePiece && chessPiece.getPosition().equals(movablePiece.getPosition())) {
+                    movablePiece.position = olderPosition;
+                    throw new IllegalChessMoveException("Illegal move");
+                }
+            }
+        }
+        if (movablePiece instanceof Pawn) {
+            int middle = 0;
+            String middleStringPosition = "";
+            if (Math.abs(ChessPiece.numberCoordinate(olderPosition) - ChessPiece.numberCoordinate(newPosition)) == 2) {
+                middle = (ChessPiece.numberCoordinate(olderPosition) + ChessPiece.numberCoordinate(newPosition))/2;
+                middleStringPosition += ChessPiece.letterStringCoordinate(newPosition);
+                middleStringPosition += Integer.toString(middle);
+                if (thereIsAPieceHere(middleStringPosition)) {
+                    movablePiece.position = olderPosition;
+                    throw new IllegalChessMoveException("Illegal move");
+                }
+            }
+        }
+        if (movablePiece instanceof Rook) {
+            if (ChessPiece.numberCoordinate(olderPosition) - ChessPiece.numberCoordinate(newPosition) > 1) {
+                for (int iterNumber = ChessPiece.numberCoordinate(newPosition) + 1;
+                     iterNumber < ChessPiece.numberCoordinate(olderPosition); iterNumber++) {
+                    String middleStringPosition = "";
+                    middleStringPosition += ChessPiece.letterStringCoordinate(newPosition);
+                    middleStringPosition += Integer.toString(iterNumber);
+                    if (thereIsAPieceHere(middleStringPosition)) {
+                        movablePiece.position = olderPosition;
+                        throw new IllegalChessMoveException("Illegal move");
+                    }
+                }
+            }
+            if (ChessPiece.numberCoordinate(newPosition) - ChessPiece.numberCoordinate(olderPosition) > 1) {
+                for (int iterNumber = ChessPiece.numberCoordinate(olderPosition) + 1;
+                     iterNumber < ChessPiece.numberCoordinate(newPosition); iterNumber++) {
+                    String middleStringPosition = "";
+                    middleStringPosition += ChessPiece.letterStringCoordinate(newPosition);
+                    middleStringPosition += Integer.toString(iterNumber);
+                    if (thereIsAPieceHere(middleStringPosition)) {
+                        movablePiece.position = olderPosition;
+                        throw new IllegalChessMoveException("Illegal move");
+                    }
+                }
+            }
+            if (ChessPiece.letterCoordinate(newPosition) - ChessPiece.letterCoordinate(olderPosition) > 1) {
+                for (int iterLetter = ChessPiece.letterCoordinate(olderPosition) + 1;
+                     iterLetter < ChessPiece.letterCoordinate(newPosition); iterLetter++) {
+                    String middleStringPosition = "";
+                    middleStringPosition += Character.toString((char) iterLetter);
+                    middleStringPosition += ChessPiece.numberStringCoordinate(newPosition);
+                    if (thereIsAPieceHere(middleStringPosition)) {
+                        movablePiece.position = olderPosition;
+                        throw new IllegalChessMoveException("Illegal move");
+                    }
+                }
+            }
+            if (ChessPiece.letterCoordinate(olderPosition) - ChessPiece.letterCoordinate(newPosition) > 1) {
+                for (int iterLetter = ChessPiece.letterCoordinate(newPosition) + 1;
+                     iterLetter < ChessPiece.letterCoordinate(olderPosition); iterLetter++) {
+                    String middleStringPosition = "";
+                    middleStringPosition += Character.toString((char) iterLetter);
+                    middleStringPosition += ChessPiece.numberStringCoordinate(newPosition);
+                    if (thereIsAPieceHere(middleStringPosition)) {
+                        movablePiece.position = olderPosition;
+                        throw new IllegalChessMoveException("Illegal move");
+                    }
+                }
+            }
+        }
+        if (movablePiece instanceof Bishop) {
+            if (ChessPiece.numberCoordinate(newPosition) - ChessPiece.numberCoordinate(olderPosition) > 1) {
+                if (ChessPiece.letterCoordinate(olderPosition) < ChessPiece.letterCoordinate(newPosition)) {
+                    int iterLetter = ChessPiece.letterCoordinate(olderPosition) + 1;
+                    for (int iterNumber = ChessPiece.numberCoordinate(olderPosition) + 1;
+                         iterNumber < ChessPiece.numberCoordinate(newPosition); iterNumber++) {
+                        String middleStringPosition = "";
+                        middleStringPosition += Character.toString((char) iterLetter);
+                        middleStringPosition += Integer.toString(iterNumber);
+                        if (thereIsAPieceHere(middleStringPosition)) {
+                            movablePiece.position = olderPosition;
+                            throw new IllegalChessMoveException("Illegal move");
+                        }
+                        iterLetter++;
+                    }
+                }
+                if (ChessPiece.letterCoordinate(olderPosition) > ChessPiece.letterCoordinate(newPosition)) {
+                    int iterLetter = ChessPiece.letterCoordinate(olderPosition) - 1;
+                    for (int iterNumber = ChessPiece.numberCoordinate(olderPosition) + 1;
+                         iterNumber < ChessPiece.numberCoordinate(newPosition); iterNumber++) {
+                        String middleStringPosition = "";
+                        middleStringPosition += Character.toString((char) iterLetter);
+                        middleStringPosition += Integer.toString(iterNumber);
+                        if (thereIsAPieceHere(middleStringPosition)) {
+                            movablePiece.position = olderPosition;
+                            throw new IllegalChessMoveException("Illegal move");
+                        }
+                        iterLetter--;
+                    }
+                }
+            }
+            if (ChessPiece.numberCoordinate(olderPosition) - ChessPiece.numberCoordinate(newPosition) > 1) {
+                if (ChessPiece.letterCoordinate(olderPosition) < ChessPiece.letterCoordinate(newPosition)) {
+                    int iterLetter = ChessPiece.letterCoordinate(olderPosition) + 1;
+                    for (int iterNumber = ChessPiece.numberCoordinate(olderPosition) - 1;
+                         iterNumber > ChessPiece.numberCoordinate(newPosition); iterNumber--) {
+                        String middleStringPosition = "";
+                        middleStringPosition += Character.toString((char) iterLetter);
+                        middleStringPosition += Integer.toString(iterNumber);
+                        if (thereIsAPieceHere(middleStringPosition)) {
+                            movablePiece.position = olderPosition;
+                            throw new IllegalChessMoveException("Illegal move");
+                        }
+                        iterLetter++;
+                    }
+                }
+                if (ChessPiece.letterCoordinate(olderPosition) > ChessPiece.letterCoordinate(newPosition)) {
+                    int iterLetter = ChessPiece.letterCoordinate(olderPosition) - 1;
+                    for (int iterNumber = ChessPiece.numberCoordinate(olderPosition) - 1;
+                         iterNumber > ChessPiece.numberCoordinate(newPosition); iterNumber--) {
+                        String middleStringPosition = "";
+                        middleStringPosition += Character.toString((char) iterLetter);
+                        middleStringPosition += Integer.toString(iterNumber);
+                        if (thereIsAPieceHere(middleStringPosition)) {
+                            movablePiece.position = olderPosition;
+                            throw new IllegalChessMoveException("Illegal move");
+                        }
+                        iterLetter--;
+                    }
+                }
+            }
+        }
+        if (movablePiece instanceof Queen) {
+            if (ChessPiece.letterCoordinate(olderPosition) == ChessPiece.letterCoordinate(newPosition)) {
+                if (ChessPiece.numberCoordinate(olderPosition) - ChessPiece.numberCoordinate(newPosition) > 1) {
+                    for (int iterNumber = ChessPiece.numberCoordinate(newPosition) + 1;
+                         iterNumber < ChessPiece.numberCoordinate(olderPosition); iterNumber++) {
+                        String middleStringPosition = "";
+                        middleStringPosition += ChessPiece.letterStringCoordinate(newPosition);
+                        middleStringPosition += Integer.toString(iterNumber);
+                        if (thereIsAPieceHere(middleStringPosition)) {
+                            movablePiece.position = olderPosition;
+                            throw new IllegalChessMoveException("Illegal move");
+                        }
+                    }
+                }
+                if (ChessPiece.numberCoordinate(newPosition) - ChessPiece.numberCoordinate(olderPosition) > 1) {
+                    for (int iterNumber = ChessPiece.numberCoordinate(olderPosition) + 1;
+                         iterNumber < ChessPiece.numberCoordinate(newPosition); iterNumber++) {
+                        String middleStringPosition = "";
+                        middleStringPosition += ChessPiece.letterStringCoordinate(newPosition);
+                        middleStringPosition += Integer.toString(iterNumber);
+                        if (thereIsAPieceHere(middleStringPosition)) {
+                            movablePiece.position = olderPosition;
+                            throw new IllegalChessMoveException("Illegal move");
+                        }
+                    }
+                }
+            }
+            if (ChessPiece.numberCoordinate(olderPosition) == ChessPiece.numberCoordinate(newPosition)) {
+                if (ChessPiece.letterCoordinate(newPosition) - ChessPiece.letterCoordinate(olderPosition) > 1) {
+                    for (int iterLetter = ChessPiece.letterCoordinate(olderPosition) + 1;
+                         iterLetter < ChessPiece.letterCoordinate(newPosition); iterLetter++) {
+                        String middleStringPosition = "";
+                        middleStringPosition += Character.toString((char) iterLetter);
+                        middleStringPosition += ChessPiece.numberStringCoordinate(newPosition);
+                        if (thereIsAPieceHere(middleStringPosition)) {
+                            movablePiece.position = olderPosition;
+                            throw new IllegalChessMoveException("Illegal move");
+                        }
+                    }
+                }
+                if (ChessPiece.letterCoordinate(olderPosition) - ChessPiece.letterCoordinate(newPosition) > 1) {
+                    for (int iterLetter = ChessPiece.letterCoordinate(newPosition) + 1;
+                         iterLetter < ChessPiece.letterCoordinate(olderPosition); iterLetter++) {
+                        String middleStringPosition = "";
+                        middleStringPosition += Character.toString((char) iterLetter);
+                        middleStringPosition += ChessPiece.numberStringCoordinate(newPosition);
+                        if (thereIsAPieceHere(middleStringPosition)) {
+                            movablePiece.position = olderPosition;
+                            throw new IllegalChessMoveException("Illegal move");
+                        }
+                    }
+                }
+            }
+            if (ChessPiece.numberCoordinate(newPosition) - ChessPiece.numberCoordinate(olderPosition) > 1) {
+                if (ChessPiece.letterCoordinate(olderPosition) < ChessPiece.letterCoordinate(newPosition)) {
+                    int iterLetter = ChessPiece.letterCoordinate(olderPosition) + 1;
+                    for (int iterNumber = ChessPiece.numberCoordinate(olderPosition) + 1;
+                         iterNumber < ChessPiece.numberCoordinate(newPosition); iterNumber++) {
+                        String middleStringPosition = "";
+                        middleStringPosition += Character.toString((char) iterLetter);
+                        middleStringPosition += Integer.toString(iterNumber);
+                        if (thereIsAPieceHere(middleStringPosition)) {
+                            movablePiece.position = olderPosition;
+                            throw new IllegalChessMoveException("Illegal move");
+                        }
+                        iterLetter++;
+                    }
+                }
+                if (ChessPiece.letterCoordinate(olderPosition) > ChessPiece.letterCoordinate(newPosition)) {
+                    int iterLetter = ChessPiece.letterCoordinate(olderPosition) - 1;
+                    for (int iterNumber = ChessPiece.numberCoordinate(olderPosition) + 1;
+                         iterNumber < ChessPiece.numberCoordinate(newPosition); iterNumber++) {
+                        String middleStringPosition = "";
+                        middleStringPosition += Character.toString((char) iterLetter);
+                        middleStringPosition += Integer.toString(iterNumber);
+                        if (thereIsAPieceHere(middleStringPosition)) {
+                            movablePiece.position = olderPosition;
+                            throw new IllegalChessMoveException("Illegal move");
+                        }
+                        iterLetter--;
+                    }
+                }
+            }
+            if (ChessPiece.numberCoordinate(olderPosition) - ChessPiece.numberCoordinate(newPosition) > 1) {
+                if (ChessPiece.letterCoordinate(olderPosition) < ChessPiece.letterCoordinate(newPosition)) {
+                    int iterLetter = ChessPiece.letterCoordinate(olderPosition) + 1;
+                    for (int iterNumber = ChessPiece.numberCoordinate(olderPosition) - 1;
+                         iterNumber > ChessPiece.numberCoordinate(newPosition); iterNumber--) {
+                        String middleStringPosition = "";
+                        middleStringPosition += Character.toString((char) iterLetter);
+                        middleStringPosition += Integer.toString(iterNumber);
+                        if (thereIsAPieceHere(middleStringPosition)) {
+                            movablePiece.position = olderPosition;
+                            throw new IllegalChessMoveException("Illegal move");
+                        }
+                        iterLetter++;
+                    }
+                }
+                if (ChessPiece.letterCoordinate(olderPosition) > ChessPiece.letterCoordinate(newPosition)) {
+                    int iterLetter = ChessPiece.letterCoordinate(olderPosition) - 1;
+                    for (int iterNumber = ChessPiece.numberCoordinate(olderPosition) - 1;
+                         iterNumber > ChessPiece.numberCoordinate(newPosition); iterNumber--) {
+                        String middleStringPosition = "";
+                        middleStringPosition += Character.toString((char) iterLetter);
+                        middleStringPosition += Integer.toString(iterNumber);
+                        if (thereIsAPieceHere(middleStringPosition)) {
+                            movablePiece.position = olderPosition;
+                            throw new IllegalChessMoveException("Illegal move");
+                        }
+                        iterLetter--;
+                    }
+                }
+            }
+        }
+        int indexForRemoval = 0;
+        boolean removePiece = false;
+        for (ChessPiece chessPiece : piecesList) {
+            if (chessPiece != movablePiece && chessPiece.getPosition().equals(movablePiece.getPosition())) {
+                removePiece = true;
+                break;
+            }
+            indexForRemoval++;
+        }
+        if (removePiece) piecesList.remove(indexForRemoval);
     }
     public boolean isCheck(ChessPiece.Color color) {
         if (color == ChessPiece.Color.WHITE) {

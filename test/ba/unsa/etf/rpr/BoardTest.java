@@ -417,7 +417,7 @@ class BoardTest {
     void bishopJumping4() {
         Board b = new Board();
         b.move("F7", "F5");
-        b.move("G2", "G4");
+        b.move("G2", "G3");
         b.move("F1", "H3");
         assertThrows(
                 IllegalChessMoveException.class,
@@ -430,7 +430,7 @@ class BoardTest {
     void bishopJumping5() {
         Board b = new Board();
         b.move("F2", "F4");
-        b.move("G7", "G5");
+        b.move("G7", "G6");
         b.move("F8", "H6");
         assertThrows(
                 IllegalChessMoveException.class,
