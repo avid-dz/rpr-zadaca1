@@ -13,7 +13,7 @@ public class Program {
               while (true) {
                   System.out.print("White move: ");
                   scanned = scan.next();
-                  if (scanned.trim().equals("X")) {
+                  if (scanned.trim().toUpperCase().equals("X")) {
                       break outer;
                   }
                   try {
@@ -67,7 +67,7 @@ public class Program {
               while (true) {
                   System.out.print("Black move: ");
                   scanned = scan.next();
-                  if (scanned.trim().equals("X")) {
+                  if (scanned.trim().toUpperCase().equals("X")) {
                       break outer;
                   }
                   try {
