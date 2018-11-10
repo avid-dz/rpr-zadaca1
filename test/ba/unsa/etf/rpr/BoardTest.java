@@ -2,6 +2,8 @@ package ba.unsa.etf.rpr;
 
 import org.junit.jupiter.api.Test;
 
+import javax.swing.text.BadLocationException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
@@ -19,6 +21,16 @@ class BoardTest {
                     b.move(King.class, ChessPiece.Color.WHITE, "E2");
                     b.move(King.class, ChessPiece.Color.WHITE, "E3");
                 }
+        );
+    }
+
+    @Test
+        // The field already taken by the same color
+    void takenBySameColor0() {
+        Board b = new Board();
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move(Rook.class, ChessPiece.Color.WHITE, "A2")
         );
     }
 
@@ -137,6 +149,46 @@ class BoardTest {
         );
     }
 
+    @Test
+        // Rook cannot jump pieces
+    void jumpPieceRook() {
+        Board b = new Board();
+        assertAll(
+                () -> assertThrows(
+                        IllegalChessMoveException.class,
+                        () -> b.move(Rook.class, ChessPiece.Color.BLACK, "A6")
+                ),
+                () -> assertThrows(
+                        IllegalChessMoveException.class,
+                        () -> b.move(Rook.class, ChessPiece.Color.WHITE, "H3")
+                ),
+                () -> assertThrows(
+                        IllegalChessMoveException.class,
+                        () -> b.move(Rook.class, ChessPiece.Color.WHITE, "A3")
+                )
+        );
+    }
+
+    @Test
+        // Rook cannot jump pieces
+    void jumpPieceRook1() {
+        Board b = new Board();
+        assertAll(
+                () -> assertThrows(
+                        IllegalChessMoveException.class,
+                        () -> b.move(Rook.class, ChessPiece.Color.BLACK, "A6")
+                ),
+                () -> assertThrows(
+                        IllegalChessMoveException.class,
+                        () -> b.move(Rook.class, ChessPiece.Color.WHITE, "H3")
+                ),
+                () -> assertThrows(
+                        IllegalChessMoveException.class,
+                        () -> b.move(Rook.class, ChessPiece.Color.WHITE, "A3")
+                )
+        );
+    }
+
 
     // Same test with other move method
 
@@ -168,6 +220,16 @@ class BoardTest {
                     b.move("E6", "D7");
                     b.move("D7", "C8");
                 }
+        );
+    }
+
+    @Test
+        // Pawn cannot move diagonally if not eating
+    void pawnDiagonal2() {
+        Board b = new Board();
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move("B2", "C3")
         );
     }
 
@@ -373,6 +435,32 @@ class BoardTest {
     }
 
     @Test
+        // A rook cannot jump pieces
+    void rookJumping4() {
+        Board b = new Board();
+        b.move("A2", "A4");
+        b.move("A1", "A3");
+        b.move("C2", "C3");
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move(Rook.class, ChessPiece.Color.WHITE, "G3")
+        );
+    }
+
+    @Test
+        // A rook cannot jump pieces
+    void rookJumping5() {
+        Board b = new Board();
+        b.move("H2", "H4");
+        b.move("H1", "H3");
+        b.move("F2", "F3");
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move(Rook.class, ChessPiece.Color.WHITE, "B3")
+        );
+    }
+
+    @Test
         // A bishop cannot jump pieces
     void bishopJumping() {
         Board b = new Board();
@@ -439,6 +527,26 @@ class BoardTest {
     }
 
     @Test
+        // A bishop cannot jump pieces
+    void bishopJumping6() {
+        Board b = new Board();
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move(Bishop.class, ChessPiece.Color.WHITE, "E3")
+        );
+    }
+
+    @Test
+        // A bishop cannot jump pieces
+    void bishopJumping7() {
+        Board b = new Board();
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move(Bishop.class, ChessPiece.Color.BLACK, "D6")
+        );
+    }
+
+    @Test
         // A rook cannot jump pieces
     void move2Exception() {
         Board b = new Board();
@@ -449,7 +557,7 @@ class BoardTest {
     }
 
     @Test
-        // Queen cannot jump vertically
+        // Queen cannot jump pieces
     void queenJump() {
         Board b = new Board();
         assertAll(
@@ -465,7 +573,7 @@ class BoardTest {
     }
 
     @Test
-        // Queen cannot jump diagonally
+        // Queen cannot jump pieces
     void queenJump1() {
         Board b = new Board();
         assertAll(
@@ -481,7 +589,7 @@ class BoardTest {
     }
 
     @Test
-        // Queen cannot jump diagonally
+        // Queen cannot jump pieces
     void queenJump2() {
         Board b = new Board();
         assertAll(
@@ -497,7 +605,7 @@ class BoardTest {
     }
 
     @Test
-        // Queen cannot jump horizontally
+        // Queen cannot jump pieces
     void queenJump3() {
         Board b = new Board();
         b.move("F2", "F3");
@@ -519,7 +627,7 @@ class BoardTest {
     }
 
     @Test
-        // Queen cannot jump horizontally
+        // Queen cannot jump pieces
     void queenJump4() {
         Board b = new Board();
         b.move("B2", "B3");
@@ -544,5 +652,127 @@ class BoardTest {
             // Do nothing
         }
         assertTrue(b.isCheck(ChessPiece.Color.WHITE));
+    }
+
+    @Test
+        // Queen cannot jump pieces
+    void queenJump5() {
+        Board b = new Board();
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move(Queen.class, ChessPiece.Color.WHITE, "D4")
+        );
+    }
+
+    @Test
+        // Queen cannot jump pieces
+    void queenJump6() {
+        Board b = new Board();
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move(Queen.class, ChessPiece.Color.BLACK, "D4")
+        );
+    }
+
+    @Test
+        // Queen cannot jump pieces
+    void queenJump7() {
+        Board b = new Board();
+        b.move("B2", "B3");
+        b.move("D2", "D4");
+        b.move("D1", "D3");
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move(Queen.class, ChessPiece.Color.WHITE, "A3")
+        );
+    }
+
+    @Test
+        // Queen cannot jump pieces
+    void queenJump8() {
+        Board b = new Board();
+        b.move("F2", "F3");
+        b.move("D2", "D4");
+        b.move("D1", "D3");
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move(Queen.class, ChessPiece.Color.WHITE, "H3")
+        );
+    }
+
+    @Test
+        // Queen cannot jump pieces
+    void queenJump9() {
+        Board b = new Board();
+        b.move("B2", "B3");
+        b.move("D2", "D4");
+        b.move("D1", "D3");
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move("D3", "A3")
+        );
+    }
+
+    @Test
+        // Queen cannot jump pieces
+    void queenJump10() {
+        Board b = new Board();
+        b.move("F2", "F3");
+        b.move("D2", "D4");
+        b.move("D1", "D3");
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move("D3", "H3")
+        );
+    }
+
+    @Test
+        // Queen cannot jump pieces
+    void queenJump11() {
+        Board b = new Board();
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move("D1", "A4")
+        );
+    }
+
+    @Test
+        // Queen cannot jump pieces
+    void queenJump12() {
+        Board b = new Board();
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move("D1", "G4")
+        );
+    }
+
+    @Test
+        // Queen cannot jump pieces
+    void queenJump13() {
+        Board b = new Board();
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move("D8", "G5")
+        );
+    }
+
+    @Test
+        // Queen cannot jump pieces
+    void queenJump14() {
+        Board b = new Board();
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move("D8", "D4")
+        );
+    }
+
+    @Test
+        // Queen cannot jump pieces
+    void queenJump15() {
+        Board b = new Board();
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move("D1", "D4")
+        );
     }
 }
