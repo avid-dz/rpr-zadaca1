@@ -51,9 +51,9 @@ public abstract class ChessPiece {
     }
     public void move(String position) {
         if (!validPosition(position))
-            throw new IllegalArgumentException("Position invalid or out of range!");
+            throw new IllegalArgumentException("Illegal move");
         if (!legalForThatKindOfPiece(position))
-            throw new IllegalChessMoveException("Illegal move for that kind of chess piece!");
+            throw new IllegalChessMoveException("Illegal move");
         this.position = position.toUpperCase();
     }
 }

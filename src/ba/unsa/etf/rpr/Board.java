@@ -65,12 +65,12 @@ public class Board {
                 } catch(Exception e) {}
             }
         }
-        if (!isFound) throw new IllegalChessMoveException("No legal chess pieces found for that move!");
+        if (!isFound) throw new IllegalChessMoveException("Illegal move");
         for (ChessPiece chessPiece : piecesList) {
             if (chessPiece != movablePiece) {
                 if (chessPiece.getPosition().equals(position) && chessPiece.getColor() == movablePiece.getColor()) {
                     movablePiece.position = olderPosition;
-                    throw new IllegalChessMoveException("Field already taken by the same color!");
+                    throw new IllegalChessMoveException("Illegal move");
                 }
             }
         }
@@ -80,7 +80,7 @@ public class Board {
             for (ChessPiece chessPiece : piecesList) {
                 if (chessPiece != movablePiece && chessPiece.getPosition().equals(movablePiece.getPosition())) {
                     movablePiece.position = olderPosition;
-                    throw new IllegalChessMoveException("Illegal move for that kind of chess piece!");
+                    throw new IllegalChessMoveException("Illegal move");
                 }
             }
         }
@@ -93,7 +93,7 @@ public class Board {
                 middleStringPosition += Integer.toString(middle);
                 if (thereIsAPieceHere(middleStringPosition)) {
                     movablePiece.position = olderPosition;
-                    throw new IllegalChessMoveException("A pawn cannot jump over other chess pieces!");
+                    throw new IllegalChessMoveException("Illegal move");
                 }
             }
         }
@@ -106,7 +106,7 @@ public class Board {
                     middleStringPosition += Integer.toString(iterNumber);
                     if (thereIsAPieceHere(middleStringPosition)) {
                         movablePiece.position = olderPosition;
-                        throw new IllegalChessMoveException("A rook cannot jump over other chess pieces!");
+                        throw new IllegalChessMoveException("Illegal move");
                     }
                 }
             }
@@ -118,7 +118,7 @@ public class Board {
                     middleStringPosition += Integer.toString(iterNumber);
                     if (thereIsAPieceHere(middleStringPosition)) {
                         movablePiece.position = olderPosition;
-                        throw new IllegalChessMoveException("A rook cannot jump over other chess pieces!");
+                        throw new IllegalChessMoveException("Illegal move");
                     }
                 }
             }
@@ -130,7 +130,7 @@ public class Board {
                     middleStringPosition += ChessPiece.numberStringCoordinate(position);
                     if (thereIsAPieceHere(middleStringPosition)) {
                         movablePiece.position = olderPosition;
-                        throw new IllegalChessMoveException("A rook cannot jump over other chess pieces!");
+                        throw new IllegalChessMoveException("Illegal move");
                     }
                 }
             }
@@ -142,7 +142,7 @@ public class Board {
                     middleStringPosition += ChessPiece.numberStringCoordinate(position);
                     if (thereIsAPieceHere(middleStringPosition)) {
                         movablePiece.position = olderPosition;
-                        throw new IllegalChessMoveException("A rook cannot jump over other chess pieces!");
+                        throw new IllegalChessMoveException("Illegal move");
                     }
                 }
             }
@@ -158,7 +158,7 @@ public class Board {
                         middleStringPosition += Integer.toString(iterNumber);
                         if (thereIsAPieceHere(middleStringPosition)) {
                             movablePiece.position = olderPosition;
-                            throw new IllegalChessMoveException("A bishop cannot jump over other chess pieces!");
+                            throw new IllegalChessMoveException("Illegal move");
                         }
                         iterLetter++;
                     }
@@ -172,7 +172,7 @@ public class Board {
                         middleStringPosition += Integer.toString(iterNumber);
                         if (thereIsAPieceHere(middleStringPosition)) {
                             movablePiece.position = olderPosition;
-                            throw new IllegalChessMoveException("A bishop cannot jump over other chess pieces!");
+                            throw new IllegalChessMoveException("Illegal move");
                         }
                         iterLetter--;
                     }
@@ -188,7 +188,7 @@ public class Board {
                         middleStringPosition += Integer.toString(iterNumber);
                         if (thereIsAPieceHere(middleStringPosition)) {
                             movablePiece.position = olderPosition;
-                            throw new IllegalChessMoveException("A bishop cannot jump over other chess pieces!");
+                            throw new IllegalChessMoveException("Illegal move");
                         }
                         iterLetter++;
                     }
@@ -202,7 +202,7 @@ public class Board {
                         middleStringPosition += Integer.toString(iterNumber);
                         if (thereIsAPieceHere(middleStringPosition)) {
                             movablePiece.position = olderPosition;
-                            throw new IllegalChessMoveException("A bishop cannot jump over other chess pieces!");
+                            throw new IllegalChessMoveException("Illegal move");
                         }
                         iterLetter--;
                     }
@@ -219,7 +219,7 @@ public class Board {
                         middleStringPosition += Integer.toString(iterNumber);
                         if (thereIsAPieceHere(middleStringPosition)) {
                             movablePiece.position = olderPosition;
-                            throw new IllegalChessMoveException("A queen cannot jump over other chess pieces!");
+                            throw new IllegalChessMoveException("Illegal move");
                         }
                     }
                 }
@@ -231,7 +231,7 @@ public class Board {
                         middleStringPosition += Integer.toString(iterNumber);
                         if (thereIsAPieceHere(middleStringPosition)) {
                             movablePiece.position = olderPosition;
-                            throw new IllegalChessMoveException("A queen cannot jump over other chess pieces!");
+                            throw new IllegalChessMoveException("Illegal move");
                         }
                     }
                 }
@@ -245,7 +245,7 @@ public class Board {
                         middleStringPosition += ChessPiece.numberStringCoordinate(position);
                         if (thereIsAPieceHere(middleStringPosition)) {
                             movablePiece.position = olderPosition;
-                            throw new IllegalChessMoveException("A queen cannot jump over other chess pieces!");
+                            throw new IllegalChessMoveException("Illegal move");
                         }
                     }
                 }
@@ -257,7 +257,7 @@ public class Board {
                         middleStringPosition += ChessPiece.numberStringCoordinate(position);
                         if (thereIsAPieceHere(middleStringPosition)) {
                             movablePiece.position = olderPosition;
-                            throw new IllegalChessMoveException("A queen cannot jump over other chess pieces!");
+                            throw new IllegalChessMoveException("Illegal move");
                         }
                     }
                 }
@@ -272,7 +272,7 @@ public class Board {
                         middleStringPosition += Integer.toString(iterNumber);
                         if (thereIsAPieceHere(middleStringPosition)) {
                             movablePiece.position = olderPosition;
-                            throw new IllegalChessMoveException("A queen cannot jump over other chess pieces!");
+                            throw new IllegalChessMoveException("Illegal move");
                         }
                         iterLetter++;
                     }
@@ -286,7 +286,7 @@ public class Board {
                         middleStringPosition += Integer.toString(iterNumber);
                         if (thereIsAPieceHere(middleStringPosition)) {
                             movablePiece.position = olderPosition;
-                            throw new IllegalChessMoveException("A queen cannot jump over other chess pieces!");
+                            throw new IllegalChessMoveException("Illegal move");
                         }
                         iterLetter--;
                     }
@@ -302,7 +302,7 @@ public class Board {
                         middleStringPosition += Integer.toString(iterNumber);
                         if (thereIsAPieceHere(middleStringPosition)) {
                             movablePiece.position = olderPosition;
-                            throw new IllegalChessMoveException("A queen cannot jump over other chess pieces!");
+                            throw new IllegalChessMoveException("Illegal move");
                         }
                         iterLetter++;
                     }
@@ -316,7 +316,7 @@ public class Board {
                         middleStringPosition += Integer.toString(iterNumber);
                         if (thereIsAPieceHere(middleStringPosition)) {
                             movablePiece.position = olderPosition;
-                            throw new IllegalChessMoveException("A queen cannot jump over other chess pieces!");
+                            throw new IllegalChessMoveException("Illegal move");
                         }
                         iterLetter--;
                     }
@@ -338,7 +338,7 @@ public class Board {
         oldPosition = oldPosition.toUpperCase();
         newPosition = newPosition.toUpperCase();
         if (!thereIsAPieceHere(oldPosition)) {
-            throw new IllegalArgumentException("There is no chess piece there!");
+            throw new IllegalArgumentException("Illegal move");
         }
         else {
             int iter = 0;
