@@ -266,4 +266,159 @@ class BoardTest {
                 }
         );
     }
+
+    @Test
+        // Field taken by the same color
+    void takenBySameColor() {
+        Board b = new Board();
+        assertAll(
+                () -> assertDoesNotThrow(
+                        () -> b.move("E2", "E4")
+                ),
+                () -> assertDoesNotThrow(
+                        () -> b.move("D1", "E2")
+                ),
+                () -> assertThrows(
+                        IllegalChessMoveException.class,
+                        () -> b.move("E2", "E4")
+                )
+        );
+    }
+
+    @Test
+        // If pawn goes vertically, the destination field must be free
+    void pawnVertically() {
+        Board b = new Board();
+        assertAll(
+                () -> assertDoesNotThrow(
+                        () -> b.move("B7", "B5")
+                ),
+                () -> assertDoesNotThrow(
+                        () -> b.move("B5", "B4")
+                ),
+                () -> assertThrows(
+                        IllegalChessMoveException.class,
+                        () -> b.move("B2", "B4")
+                )
+        );
+    }
+
+    @Test
+        // A pawn cannot jump pieces
+    void pawnJumping() {
+        Board b = new Board();
+        assertAll(
+                () -> assertDoesNotThrow(
+                        () -> b.move("B1", "C3")
+                ),
+                () -> assertThrows(
+                        IllegalChessMoveException.class,
+                        () -> b.move("C2", "C4")
+                )
+        );
+    }
+
+    @Test
+        // A rook cannot jump pieces
+    void rookJumping() {
+        Board b = new Board();
+        b.move("H2", "H4");
+        b.move("H1", "H3");
+        b.move("G2", "G3");
+        assertAll(
+                () -> assertThrows(
+                        IllegalChessMoveException.class,
+                        () -> b.move("H3", "B3")
+                )
+        );
+    }
+
+    @Test
+        // A rook cannot jump pieces
+    void rookJumping1() {
+        Board b = new Board();
+        assertAll(
+                () -> assertThrows(
+                        IllegalChessMoveException.class,
+                        () -> b.move("H1", "H3")
+                )
+        );
+    }
+
+    @Test
+        // A rook cannot jump pieces
+    void rookJumping2() {
+        Board b = new Board();
+        assertAll(
+                () -> assertThrows(
+                        IllegalChessMoveException.class,
+                        () -> b.move("H1", "H3")
+                )
+        );
+    }
+
+    @Test
+        // A rook cannot jump pieces
+    void rookJumping3() {
+        Board b = new Board();
+        b.move("A2", "A4");
+        b.move("A1", "A3");
+        b.move("B2", "B3");
+        assertAll(
+                () -> assertThrows(
+                        IllegalChessMoveException.class,
+                        () -> b.move("A3", "C3")
+                )
+        );
+    }
+
+    @Test
+        // A bishop cannot jump pieces
+    void bishopJumping() {
+        Board b = new Board();
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move("F1", "C4")
+        );
+    }
+
+    @Test
+        // A bishop cannot jump pieces
+    void bishopJumping1() {
+        Board b = new Board();
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move("C1", "F4")
+        );
+    }
+
+    @Test
+        // A bishop cannot jump pieces
+    void bishopJumping2() {
+        Board b = new Board();
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move("C8", "F5")
+        );
+    }
+
+    @Test
+        // A bishop cannot jump pieces
+    void bishopJumping3() {
+        Board b = new Board();
+        assertThrows(
+                IllegalChessMoveException.class,
+                () -> b.move("F8", "B4")
+        );
+    }
+
+    @Test
+        // A rook cannot jump pieces
+    void move2Exception() {
+        Board b = new Board();
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> b.move("F5", "F6")
+        );
+    }
 }
