@@ -58,11 +58,11 @@ public class Board {
             if (chessPiece.getClass().equals(type) && chessPiece.getColor() == color) {
                 try {
                     olderPosition = chessPiece.getPosition();
-                    chessPiece.move(position);
-                    isFound = true;
+                    chessPiece.move(position);  //  trying to move the piece to see if the movement is legal for it
+                    isFound = true;     //  if the movement is legal, the piece is found and we stop searching
                     movablePiece = chessPiece;
                     break;
-                } catch(Exception e) {}
+                } catch(Exception e) {}  // if the movement is not legal we continue searching
             }
         }
         if (!isFound) throw new IllegalChessMoveException("Illegal move");
@@ -70,11 +70,11 @@ public class Board {
             if (chessPiece != movablePiece) {
                 if (chessPiece.getPosition().equals(position) && chessPiece.getColor() == movablePiece.getColor()) {
                     movablePiece.position = olderPosition;
-                    throw new IllegalChessMoveException("Illegal move");
+                    throw new IllegalChessMoveException("Illegal move");    //  field already taken by the same color
                 }
             }
         }
-        if (movablePiece instanceof Pawn
+        if (movablePiece instanceof Pawn    //  pawn cannot move vertically if destination field is not empty
                 && ChessPiece.letterCoordinate(olderPosition)
                 == ChessPiece.letterCoordinate(movablePiece.getPosition())) {
             for (ChessPiece chessPiece : piecesList) {
@@ -84,7 +84,7 @@ public class Board {
                 }
             }
         }
-        if (movablePiece instanceof Pawn) {
+        if (movablePiece instanceof Pawn) {     //     pawn's jumping is forbidden
             int middle = 0;
             String middleStringPosition = "";
             if (Math.abs(ChessPiece.numberCoordinate(olderPosition) - ChessPiece.numberCoordinate(position)) == 2) {
@@ -97,7 +97,7 @@ public class Board {
                 }
             }
         }
-        if (movablePiece instanceof Rook) {
+        if (movablePiece instanceof Rook) {     //  rook's jumping is forbidden
             if (ChessPiece.numberCoordinate(olderPosition) - ChessPiece.numberCoordinate(position) > 1) {
                 for (int iterNumber = ChessPiece.numberCoordinate(position) + 1;
                      iterNumber < ChessPiece.numberCoordinate(olderPosition); iterNumber++) {
@@ -147,7 +147,7 @@ public class Board {
                 }
             }
         }
-        if (movablePiece instanceof Bishop) {
+        if (movablePiece instanceof Bishop) {   //  bishop's jumping is forbidden
             if (ChessPiece.numberCoordinate(position) - ChessPiece.numberCoordinate(olderPosition) > 1) {
                 if (ChessPiece.letterCoordinate(olderPosition) < ChessPiece.letterCoordinate(position)) {
                     int iterLetter = ChessPiece.letterCoordinate(olderPosition) + 1;
@@ -209,7 +209,7 @@ public class Board {
                 }
             }
         }
-        if (movablePiece instanceof Queen) {
+        if (movablePiece instanceof Queen) {    //  queen's jumping is forbidden
             if (ChessPiece.letterCoordinate(olderPosition) == ChessPiece.letterCoordinate(position)) {
                 if (ChessPiece.numberCoordinate(olderPosition) - ChessPiece.numberCoordinate(position) > 1) {
                     for (int iterNumber = ChessPiece.numberCoordinate(position) + 1;
@@ -332,7 +332,7 @@ public class Board {
             }
             indexForRemoval++;
         }
-        if (removePiece) piecesList.remove(indexForRemoval);
+        if (removePiece) piecesList.remove(indexForRemoval);        //  eating
     }
     public void move(String oldPosition, String newPosition) {
         oldPosition = oldPosition.toUpperCase();
@@ -342,12 +342,20 @@ public class Board {
         }
         String olderPosition = oldPosition;
         int iter = 0;
-        for (ChessPiece chessPiece : piecesList) {
+        for (ChessPiece chessPiece : piecesList) {      //  finding the right piece to move
             if (chessPiece.getPosition().equals(oldPosition))
                 break;
             iter++;
         }
-        piecesList.get(iter).move(newPosition);
+        if (piecesList.get(iter) instanceof Pawn) {     //  pawn cannot move diagonally if not eating
+            if (Math.abs(ChessPiece.numberCoordinate(olderPosition) - ChessPiece.numberCoordinate(newPosition))
+                    == Math.abs(ChessPiece.letterCoordinate(olderPosition)
+                    - ChessPiece.letterCoordinate(newPosition))) {
+                if (!thereIsAPieceHere(newPosition))
+                    throw new IllegalChessMoveException("Illegal move");
+            }
+        }
+        piecesList.get(iter).move(newPosition);     //  moving
         ChessPiece movablePiece = piecesList.get(iter);
         for (ChessPiece chessPiece : piecesList) {
             if (chessPiece != movablePiece) {
