@@ -58,6 +58,14 @@ public class Board {
             if (chessPiece.getClass().equals(type) && chessPiece.getColor() == color) {
                 try {
                     olderPosition = chessPiece.getPosition();
+                    if (chessPiece instanceof Pawn) {     //  Pawn cannot move diagonally if not eating
+                        if (Math.abs(ChessPiece.numberCoordinate(olderPosition) - ChessPiece.numberCoordinate(position))
+                                == Math.abs(ChessPiece.letterCoordinate(olderPosition)
+                                - ChessPiece.letterCoordinate(position))) {
+                            if (!thereIsAPieceHere(position))
+                                throw new IllegalChessMoveException("Illegal move");
+                        }
+                    }
                     chessPiece.move(position);  //  Trying to move the piece to see if the movement is legal for it
                     isFound = true;     //  If the movement is legal, the piece is found and we stop searching
                     movablePiece = chessPiece;
