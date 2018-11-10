@@ -14,7 +14,6 @@ public class Program {
                   System.out.print("White move: ");
                   scanned = scan.next();
                   if (scanned.trim().equals("X")) {
-                      System.out.println("White has given up. Black wins.");
                       break outer;
                   }
                   try {
@@ -69,7 +68,6 @@ public class Program {
                   System.out.print("Black move: ");
                   scanned = scan.next();
                   if (scanned.trim().equals("X")) {
-                      System.out.println("Black has given up. White wins.");
                       break outer;
                   }
                   try {
